@@ -1,0 +1,37 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'com.beniamin.allegro'
+version = '1.0-SNAPSHOT'
+
+description = """Aplikacja utylizująca WebAPI firmy Allegro."""
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+
+sourceSets {
+    main {
+        java {
+           srcDir 'allegro-webapi/src/'
+        }
+    }
+}
+
+// Various ways to access the main source set
+println sourceSets.main.java.srcDirs
+def sout = new StringBuffer(), serr = new StringBuffer()
+def proc = 'java -version'.execute()
+proc.consumeProcessOutput(sout, serr)
+proc.waitForOrKill(1000)
+println "out> $sout err> $serr"
+
+repositories {
+     mavenCentral()
+}
+
+dependencies {
+    compile group: 'axis', name: 'axis', version:'1.4'
+    compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}

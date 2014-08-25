@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefHeight="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <top>
+      <FlowPane BorderPane.alignment="CENTER">
+         <children>
+            <ComboBox prefWidth="150.0" />
+            <ChoiceBox prefWidth="150.0" />
+            <Button mnemonicParsing="false" text="Button" onAction="#doSomething" />
+         </children>
+      </FlowPane>
+   </top>
+   <bottom>
+      <FlowPane BorderPane.alignment="CENTER">
+         <children>
+            <Label text="%language" />
+            <Label text="Label" />
+            <Label text="Label" />
+         </children>
+      </FlowPane>
+   </bottom>
+   <center>
+      <VBox prefHeight="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <FlowPane prefWidth="200.0" minWidth="600">
+               <children>
+                  <Label text="%username_txt" textFill="aqua" />
+                  <TextField promptText="%username_txt"/>
+                  <Label text="%password_txt"/>
+                  <TextField promptText="%password_txt"/>
+               </children>
+            </FlowPane>
+            <TableView prefHeight="200.0" prefWidth="200.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="C1" />
+                <TableColumn prefWidth="75.0" text="C2" />
+              </columns>
+            </TableView>
+            <ToggleButton mnemonicParsing="false" text="ToggleButton" />
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
