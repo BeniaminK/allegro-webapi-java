@@ -18,6 +18,7 @@ sourceSets {
     }
 }
 
+
 // Various ways to access the main source set
 println sourceSets.main.java.srcDirs
 def sout = new StringBuffer(), serr = new StringBuffer()
@@ -33,5 +34,25 @@ repositories {
 dependencies {
     compile group: 'axis', name: 'axis', version:'1.4'
     compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+    compile 'javax.mail:mail:1.4'
+    compile 'javax.activation:activation:1.1.1'
     testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+
+task genWsdl2Java {
+    ant.get(src: 'https://webapi.allegro.pl/service.php?wsdl', dest: 'allegro_service.wsdl')
+    def cp = ''
+    configurations.runtime.each { cp += it.toString() + ":" }
+    def gen_proc = ('java -cp ' + cp + ' org.apache.axis.wsdl.WSDL2Java allegro_service.wsdl').execute()
+    new File('pl').renameTo(new File('src/pl'))
+    proc.consumeProcessOutput(sout, serr)
+    proc.waitForOrKill(5000)
+    println "out> $sout err> $serr"
+}
+
+task printDeps {
+    doLast {
+        println "Dependencies:"
+        configurations.runtime.each { println it }
+    }
 }
